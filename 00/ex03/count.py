@@ -1,7 +1,7 @@
 from curses.ascii import islower, ispunct, isspace, isupper
 import sys
 
-def analyze(s: str) -> None:
+def text_analyzer(s: str) -> None:
 	"""
 	input: String
 	output: String
@@ -35,7 +35,7 @@ def main():
 		return
 	else:
 		s = sys.argv[1]
-	analyze(s)
+	text_analyzer(s)
 
 
 if __name__ == "__main__":

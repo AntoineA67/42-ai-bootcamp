@@ -1,3 +1,3 @@
 kata = "The right format"
 
-print(f'{kata.rjust(41, "-")}')
+print(kata.rjust(41, "-"), end='')
