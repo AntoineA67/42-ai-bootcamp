@@ -6,5 +6,6 @@ def main():
 	else:
 		print(sys.argv[1].swapcase()[::-1])
 
+
 if __name__ == "__main__":
 	main()
