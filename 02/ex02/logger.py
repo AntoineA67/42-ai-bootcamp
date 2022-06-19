@@ -4,11 +4,13 @@ from random import randint
 
 def log(func):
 	def wrapper(*args, **kwargs):
-		start = time.time_ns()
-		func(*args, **kwargs)
+		start = time.time()
+		r = func(*args, **kwargs)
 		with open('./machine.log', 'a') as log_file:
-			log_file.write(f'({os.environ["USER"]})Running: {func.__name__.replace("_", " ").title():<19}[ exec-time = {(time.time_ns() - start) / 1000:.3f} ms ]\n')
+			n = time.time() - start
+			log_file.write(f'({os.environ["USER"]})Running: {func.__name__.replace("_", " ").title():<19}[ exec-time = {n * (1000 if n < 1 else 1):.3f} {"ms" if n < 1 else "s"} ]\n')
 			log_file.close()
+		return r
 
 	return wrapper
 
