@@ -1,4 +1,4 @@
-from time import sleep, strftime, time
+from time import sleep, time
 
 def ft_progress(lst):
 	start = time()
