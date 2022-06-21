@@ -8,7 +8,7 @@ setup(
 	name='my_minipack',
 	version='1.0.0',
 	description='Howto create a package in python',
-	home_page=None,
+	home_page='None',
 	long_description=long_description,
 	author='arangoni',
 	author_email='arangoni@student.42lyon.fr',
