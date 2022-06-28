@@ -26,11 +26,3 @@ class ImageProcessor():
 			print(f"Exception: Could not display file", file=sys.stderr)
 			return
 
-imp = ImageProcessor()
-arr = imp.load("fef.png")
-print(arr)
-arr = imp.load("./empty_file.png")
-print(arr)
-arr = imp.load("../resources/42AI.png")
-print(arr)
-imp.display(arr)
