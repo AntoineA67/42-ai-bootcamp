@@ -1,4 +1,5 @@
 import numpy as np
+from urllib3 import Retry
 
 class ScrapBooker:
 	def __init__(self) -> None:
@@ -45,12 +46,12 @@ class ScrapBooker:
 		"""
 		s = array.shape
 		axis = (axis - 1) * -1
-		if n <= 0 or axis not in (0, 1) or n > s[axis]:
+		if n <= 0 or axis not in (0, 1) or n >= s[axis]:
 			return None
 		return np.delete(array, range(n - 1, s[axis], n), axis)
 
 
-	def juxtapose(self, array, n, axis):
+	def juxtapose(self, array: np.ndarray, n: int, axis: int):
 		"""
 		Juxtaposes n copies of the image along the specified axis.
 		Args:
@@ -66,7 +67,10 @@ class ScrapBooker:
 		-------
 		This function should not raise any Exception.
 		"""
-		pass
+		if n <= 0 or axis not in (0, 1):
+			return None
+		return np.tile(array, (1, n) if axis == 1 else (n, 1))
+
 	def mosaic(self, array, dim):
 		"""
 		Makes a grid with multiple copies of the array. The dim argument specifies
@@ -83,4 +87,6 @@ class ScrapBooker:
 		-------
 		This function should not raise any Exception.
 		"""
-		pass
+		if len(dim) != 2 or dim[0] < 0 or dim[1] < 0:
+			return None
+		return np.tile(array, dim)
