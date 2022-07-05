@@ -22,6 +22,6 @@ setup(
 		'Intended Audience :: Students',
       ],
 	package_dir={"": "my_minipack"},
-	py_modules=['logger', 'progress'],
+	py_modules=['logger', 'progress', 'ImageProcessor', 'csvreader'],
 	python_requires='>=3',
 )
