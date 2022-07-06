@@ -2,7 +2,7 @@ from FileLoader import FileLoader
 from YoungestFellah import youngest_fellah
 
 def main():
-	data = FileLoader.load('../data/athlete_events.csv')
+	data = FileLoader.load("../data/athlete_events.csv").drop_duplicates(subset='Name')
 	print('2004:', youngest_fellah(data, 2004))
 	print('2012:', youngest_fellah(data, 2012))
 

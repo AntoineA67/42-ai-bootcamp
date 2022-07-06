@@ -3,7 +3,7 @@ from SpatioTemporalData import SpatioTemporalData
 
 def main():
 	loader = FileLoader()
-	data = loader.load('../data/athlete_events.csv')
+	data = loader.load("../data/athlete_events.csv")
 	sp = SpatioTemporalData(data)
 	print(f"Where 1896: {sp.where(1896)}")
 	print(f"Where 2016: {sp.where(2016)}")
