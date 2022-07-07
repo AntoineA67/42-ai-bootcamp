@@ -35,7 +35,5 @@ def loss_(y: np.ndarray, y_hat: np.ndarray):
 		This function should not raise any Exception.
 	"""
 	elem = loss_elem_(y, y_hat)
-	if elem is None:
-		print('aaaaa')
-		return None
+	if elem is None: return None
 	return loss_elem_(y, y_hat).mean() / 2
