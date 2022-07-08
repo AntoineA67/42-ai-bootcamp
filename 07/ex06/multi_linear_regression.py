@@ -75,7 +75,7 @@ class MyLinearRegression:
 
 		X: np.ndarray = np.c_[np.ones(x.shape[0]), x]
 
-		return (np.matmul(X.T / x.size, np.matmul(X, theta) - y))
+		return np.matmul(X.T / x.size, np.matmul(X, theta) - y)
 
 
 	def fit_(self, x: np.ndarray, y: np.ndarray):
