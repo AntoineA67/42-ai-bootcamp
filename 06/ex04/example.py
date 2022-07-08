@@ -44,11 +44,9 @@ def main():
 	thetas0 = np.arange(linear_model1.thetas[0] - 3, linear_model1.thetas[0] + 3, 1)
 	t_loss = np.array([[MyLR.loss_(Yscore, MyLR([i, x]).predict_(Xpill)) for x in t] for i in thetas0])
 
-	# print(t_loss)
 	for i, theta0 in enumerate(t_loss):
 		ax[1].plot(t, theta0, label=f'J(θ0={thetas0[i]:.2f}, θ1)')
 	ax[1].legend()
-
 
 	plt.show()
 
