@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from time import sleep, time
 
-class MyLinearRegression():
+class MyLinearRegression:
 	"""
 		Description:
 			My personnal linear regression class to fit like a boss.
@@ -24,8 +24,34 @@ class MyLinearRegression():
 	{str(i + 1) + '/' + str(len(lst)):^10} \
 	{'{'}{'=' + '=' * int(20 * (i + 1) / len(lst)) + ('>' if int(20 * (i + 1) / len(lst)) < 20 else ''):21}{'}'} \
 	{'ETA: ' + (str(int(eta / 60)).zfill(2) + 'm' if int(eta / 60) > 0 else '') + str(int(eta % 60)).zfill(2) + 's' if i != len(lst) - 1 else 'Finished':^10} \
-	{str(int(i / len(lst) * 100)) + '%' if i < len(lst) - 1 else '':^5}", end='')
+	{str(int(i / len(lst) * 100)) + '%' if i < len(lst) - 1 else '':^5}", end='\n' if i == len(lst) - 1 else '')
 			yield i
+
+	@staticmethod
+	def mse_elem_(y: np.ndarray, y_hat: np.ndarray):
+		if type(y) != np.ndarray or type(y_hat) != np.ndarray: return None
+
+		if y.shape != y_hat.shape:
+			return np.power(y_hat - y.swapaxes(0, 1), 2)
+		return np.power(y_hat - y, 2)
+
+	@staticmethod
+	def mse_(y: np.ndarray, y_hat: np.ndarray):
+		"""
+		Description:
+			Calculate the MSE between the predicted output and the real output.
+		Args:
+			y: has to be a numpy.array, a vector of dimension m * 1.
+			y_hat: has to be a numpy.array, a vector of dimension m * 1.
+		Returns:
+			mse: has to be a float.
+			None if there is a matching dimension problem.
+		Raises:
+			This function should not raise any Exceptions.
+		"""
+		if type(y) != np.ndarray or type(y_hat) != np.ndarray: return None
+
+		return MyLinearRegression.mse_elem_(y, y_hat).mean()
 
 	def fit_(self, x: np.ndarray, y: np.ndarray):
 		"""
