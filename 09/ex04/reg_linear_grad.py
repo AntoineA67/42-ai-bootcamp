@@ -19,17 +19,10 @@ def reg_linear_grad(y: np.ndarray, x: np.ndarray, theta: np.ndarray, lambda_: fl
 	if type(y) == type(x) == type(theta) != np.ndarray or not isinstance(lambda_, (int, float)) or y.size == 0 or x.size == 0:
 		return None
 	
-	X = np.c_[np.ones(len(x)), x]
-	J = np.array([(X.dot(theta) - y).mean()])
+	X: np.ndarray = np.c_[np.ones(len(x)), x]
+	theta2: np.ndarray = np.append(0, theta[1:])
 
-	for j in range(x.shape[1]):
-		s = 0
-		for i in range(len(x)):
-			s += (theta[0] + (theta[1:] * x[i]).sum() - y[i]) * x[i][j] + float(lambda_ * theta[j])
-		print(s)
-		J = np.append(J, s / len(x))
-	
-	return J
+	return (X.T.dot((X.dot(theta) - y)) + (lambda_ * theta2)[:, np.newaxis]) / len(x)
 
 
 def vec_reg_linear_grad(y: np.ndarray, x: np.ndarray, theta: np.ndarray, lambda_: float):
@@ -48,5 +41,10 @@ def vec_reg_linear_grad(y: np.ndarray, x: np.ndarray, theta: np.ndarray, lambda_
 	Raises:
 		This function should not raise any Exception.
 	"""
-	if type(y) == type(x) == type(theta) != np.ndarray or type(lambda_) != float or y.size != 0 or x.size != 0:
+	if type(y) == type(x) == type(theta) != np.ndarray or not isinstance(lambda_, (int, float)) or y.size == 0 or x.size == 0:
 		return None
+	
+	X: np.ndarray = np.c_[np.ones(len(x)), x]
+	theta2: np.ndarray = np.append(0, theta[1:])
+
+	return (X.T.dot((X.dot(theta) - y)) + (lambda_ * theta2)[:, np.newaxis]) / len(x)
