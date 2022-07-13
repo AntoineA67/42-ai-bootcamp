@@ -1,11 +1,11 @@
 import numpy as np
 from ridge import MyRidge
+from multi_linear_regression import MyLinearRegression as MyLR
 import matplotlib.pyplot as plt
 
 def main():
 	X = np.random.rand(3, 4)
 	Y = np.array([[23.], [48.], [218.]])
-	# Y = np.random.rand(3)[:, np.newaxis]
 	mylr = MyRidge([[42.], [1.], [1.], [1.], [1]], lambda_=.5)
 
 	# Example 0:
@@ -21,7 +21,6 @@ def main():
 	# Example 3:
 	mylr.alpha = 1.6e-4
 	mylr.max_iter = 20000
-	print(X, Y)
 	mylr.fit_(X, Y)
 	print(f'mylr.theta:\n{mylr.theta}\n\n')
 
@@ -35,18 +34,21 @@ def main():
 	# Example 6:
 	print(f'mylr.loss_(Y, y_hat):\n{mylr.loss_(Y, y_hat)}\n\n')
 
-	X = np.array([[1.], [2.], [3.]])
-	Y = np.random.rand(3)[:, np.newaxis]
-	mylr = MyRidge([[1.], [1.]], lambda_=0)
 
-	mylr.fit_(X, Y)
-	Y_hat = mylr.predict_(X)
+	X = np.random.rand(20)[:, np.newaxis]
+	Y = np.random.rand(20)[:, np.newaxis]
+
 	_, ax = plt.subplots()
 
-	ax.scatter(X, Y)
-	ax.scatter(X, Y_hat, c='violet')
-	ax.plot(X, Y_hat)
+	for i in range(5):
+		mylr = MyRidge([[1.], [1.]], lambda_=i, alpha=.001, max_iter=10000)
+		mylr.fit_(X, Y)
+		Y_hat = mylr.predict_(X)
+		ax.scatter(X, Y_hat)
+		ax.plot(X, Y_hat, label=f'Lambda {i}')
 
+	ax.scatter(X, Y)
+	ax.legend()
 	plt.show()
 
 if __name__ == '__main__':
